@@ -1,0 +1,15 @@
+int sum = 0;
+int sumofleaf(Node* root)
+{
+  if(!root)
+  {
+    return 0;
+  }
+  if(!root->left and !root->right)
+  {
+    sum+=root->data;
+  }
+  sumofleaf(root->left);
+  sumofleaf(root->right);
+  return sum;
+}
