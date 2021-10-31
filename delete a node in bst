@@ -1,0 +1,42 @@
+int find_max(Node* root)
+{
+    if(!root->right)
+    {
+        return root->data;
+    }
+    find_max(root->right);
+}
+Node *deleteNode(Node *root, int key)
+{
+    if(!root) return NULL;
+    if(root->data>key)
+    {
+        root->left = deleteNode(root->left,key);
+    }
+    else if(root->data<key)
+    {
+        root->right = deleteNode(root->right,key);
+    }
+    else
+    {
+        if(root->left and root->right)
+        {
+            int lmax = find_max(root->left);
+            root->data = lmax;
+            root->left = deleteNode(root->left,lmax);
+        }
+        else if(root->left)
+        {
+            return root->left;
+        }
+        else if(root->right)
+        {
+            return root->right;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    return root;
+}
